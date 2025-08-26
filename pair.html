@@ -6,133 +6,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Courier New', monospace;
+      font-family: 'Courier New', Courier, monospace;
       background-color: #0a0a0a;
-      color: #00ff41; /* Matrix green */
+      color: #33cc33;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-      background-image: 
-        radial-gradient(rgba(0, 255, 65, 0.1) 2px, transparent 2px),
-        radial-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px);
-      background-size: 40px 40px, 20px 20px;
-      background-position: 0 0, 20px 20px;
+      padding: 50px 20px;
+      overflow: hidden;
     }
     h1 {
-      color: #00ff88;
-      font-size: 28px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px #00ff88;
-      letter-spacing: 2px;
+      color: #33cc33;
+      font-size: 42px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #33cc33, 0 0 20px #33cc33, 0 0 30px #33cc33;
+      animation: glow 1.5s infinite alternate;
     }
-    .container {
-      width: 100%;
-      max-width: 500px;
-      border: 1px solid #00ff41;
-      border-radius: 5px;
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 20px #33cc33, 0 0 30px #33cc33, 0 0 40px #33cc33;
+      }
+      100% {
+        text-shadow: 0 0 10px #33cc33, 0 0 20px #33cc33, 0 0 30px #33cc33;
+      }
+    }
+    .terminal {
+      background-color: #111111;
+      color: #33cc33;
       padding: 20px;
-      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-      background-color: rgba(10, 10, 10, 0.9);
+      border-radius: 12px;
+      font-size: 20px;
+      width: 100%;
+      max-width: 700px;
+      border: 2px solid #33cc33;
+      box-sizing: border-box;
+      text-align: left;
+      margin-bottom: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
     input, button {
       padding: 12px;
-      font-size: 16px;
-      border-radius: 4px;
+      font-size: 18px;
+      border-radius: 8px;
       border: none;
       margin: 10px 0;
       width: 100%;
-      font-family: 'Courier New', monospace;
+      max-width: 500px;
+      background-color: #1c1c1c;
+      color: #33cc33;
+      border: 2px solid #33cc33;
+      box-sizing: border-box;
+      outline: none;
     }
-    input {
-      background: #000;
-      color: #00ff41;
-      border: 1px solid #00ff41;
-      box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
-    }
-    input::placeholder {
-      color: #008f2a;
+    input:focus, button:focus {
+      border-color: #ff6600;
     }
     button {
-      background-color: #000;
-      color: #00ff41;
+      background-color: #222222;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid #00ff41;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
     button:hover {
-      background-color: #00ff41;
-      color: #000;
-      box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+      background-color: #333333;
+      transform: scale(1.05);
     }
     .output {
       margin-top: 30px;
-      background: #000;
+      background: #222222;
       padding: 20px;
-      border-radius: 4px;
-      word-break: break-all;
-      border: 1px solid #00ff41;
-      box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+      border-radius: 10px;
+      max-width: 600px;
+      word-wrap: break-word;
+      border: 2px solid #33cc33;
+      font-size: 18px;
+      box-sizing: border-box;
+      text-shadow: 0 0 10px #33cc33, 0 0 20px #33cc33;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
-    .whatsapp-btn {
-      display: block;
-      margin-top: 30px;
-      text-align: center;
-      padding: 12px;
-      background-color: #000;
-      color: #25D366; /* WhatsApp green */
-      border: 1px solid #25D366;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
-    .whatsapp-btn:hover {
-      background-color: #25D366;
-      color: #000;
-      box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
+    .typing {
+      font-family: 'Courier New', Courier, monospace;
+      color: #33cc33;
+      animation: typing 3s steps(40) 1s infinite, blink 0.75s step-end infinite;
     }
-    .scan-line {
-      height: 2px;
-      background: linear-gradient(to right, transparent, #00ff41, transparent);
-      position: absolute;
-      top: 0;
-      width: 100%;
-      animation: scan 3s linear infinite;
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
     }
-    @keyframes scan {
-      0% { top: 0; }
-      100% { top: 100%; }
-    }
-    .header {
-      position: relative;
-      overflow: hidden;
-      padding: 10px;
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>ARHAM-PAIRING</h1>
-    <div class="scan-line"></div>
-  </div>
+  <h1>ARHAM-PAIRING TERMINAL</h1>
 
-  <div class="container">
-    <input type="text" id="number" placeholder="Enter WhatsApp Number (e.g., 923703250530)" />
+  <div class="terminal">
+    <span>~$</span> <input type="text" id="number" placeholder="Enter WhatsApp Number (e.g., 923703250530)" />
     <button onclick="getCode()">Generate Pair Code</button>
-
-    <div id="result" class="output" style="display:none;"></div>
-
-    <a href="https://whatsapp.com/channel/0029VaHLq9X8kyyVvlT7RD0Q" class="whatsapp-btn" target="_blank">
-      Join Our WhatsApp Channel
-    </a>
   </div>
+
+  <div id="result" class="output"></div>
 
   <script>
     async function getCode() {
@@ -140,29 +141,33 @@
       const resultBox = document.getElementById("result");
 
       if (!number) {
-        alert("Please enter a valid number.");
+        showTypingEffect(resultBox, "⚠️ Please enter a valid number.");
         return;
       }
 
+      resultBox.innerHTML = '<span class="typing">⏳ Generating code, please wait...</span>';
       resultBox.style.display = 'block';
-      resultBox.textContent = "⏳ Generating code, please wait...";
 
       try {
         const res = await fetch(`/code?number=${encodeURIComponent(number)}`);
         const data = await res.json();
 
         if (data.code) {
-          resultBox.textContent = `✅ Pairing Code: ${data.code}`;
+          showTypingEffect(resultBox, `✅ Pairing Code: ${data.code}`);
         } else if (data.error) {
-          resultBox.textContent = `❌ Error: ${data.error}`;
+          showTypingEffect(resultBox, `❌ Error: ${data.error}`);
         } else {
-          resultBox.textContent = "⚠️ Unknown response received.";
+          showTypingEffect(resultBox, "⚠️ Unknown response received.");
         }
       } catch (err) {
-        resultBox.textContent = `❌ Failed to get code: ${err.message}`;
+        showTypingEffect(resultBox, `❌ Failed to get code: ${err.message}`);
       }
+    }
+
+    function showTypingEffect(element, message) {
+      element.innerHTML = `<span class="typing">${message}</span>`;
     }
   </script>
 
 </body>
-</html>
+  </html>
